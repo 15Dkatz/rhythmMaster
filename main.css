@@ -1,9 +1,14 @@
 #drumCircle {
 	float: inline-block;
-	width: 40rem;
-	height: 40rem;
+	width: 20rem;
+	height: 20rem;
 	border-radius: 50%;
 	background-color: #000;
-	margin-left: 15%;
-	margin-top: 15%;
+	/*margin-left: 15%;*/
+	/*margin-top: 15%;*/
+	margin: 0 auto;
+}
+
+body {
+	text-align: center;
 }

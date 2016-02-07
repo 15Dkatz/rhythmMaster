@@ -13,15 +13,16 @@
 	<body>
 		<div ng-app="rhythmApp">
 			<div ng-controller="rhythmController">
+				<h2>In 4/4. Tap the rhythm at your own tempo</h2>
+				<h3 id="rhythm">{{rhythm}}</h3>
 				<div id="drumCircle" ng-click="tapDrum()"></div>
 				<div ng-click="playRhythm()">
 					playback.
 				</div>
-				<div ng-click="compareRhythm()">
+			<!-- 	<div ng-click="compareRhythm()">
 					compare.
-				</div>
-
-
+				</div> -->
+				<div id="accuracy">Accuracy: {{accuracy}}%</div>
 			</div>
 		</div>
 	</body>
