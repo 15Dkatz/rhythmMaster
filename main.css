@@ -1,3 +1,9 @@
+@font-face {
+	font-family: "MusiSync";
+	src: url("MusiSync.ttf") format("truetype");
+}
+
+
 body {
 	text-align: center;
 	background-color: #1e88e5; /* blue darken-1 */
@@ -11,11 +17,16 @@ body {
 	margin-bottom: -3%;
 }
 
+.rhythmDisplays {
+	font-family: "MusiSync";
+}
+
 #rhythmDisplayF, #rhythmDisplayJ {
 	display: inline-block;
 	width: 25rem;
 	margin: 6.22%;
 	font-size: 5rem;
+	/*font-family: "MusiSync";*/
 }
 
 
@@ -34,3 +45,12 @@ body {
 	margin: 10%;
 	margin-top: -1%;
 }
+
+
+/*CSS transitions*/
+/*Page 1: Info page - "Go at your own pace, but keep the 4/4 tempo! F controls the top stave, J controls the bottom stave. The number controls how many beats each tap should last for."*/
+/*Page 2: Game page - Drumset containing F and J. Animation whenever you click.*/
+/*Page 3: Accuracy Page upon pullup. Contains accuracy, accuracy thus far, and so on Click to start new game.*/
+
+/*Additions!*/
+/*New LEVELS!*/

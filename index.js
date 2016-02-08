@@ -98,9 +98,30 @@ rhythmApp.controller("rhythmController", function($scope) {
 	 	//end of class
  	}
 
+ 	//Transform the Rythm into musiSync readable code.
+ 	//perhaps use to create rests!
+ 	var numNotePairs = {
+ 		1: "q",
+ 		2: "h",
+ 		3: "j",
+ 		4: "w"
+ 	}
+
+
  	var keyF = new KeyRhythm("F");
  	$scope.keyFDisplay = keyF.rhythmDisplay.substr(9);
 
+
+ 	//change each num in keyFDisplay to a char in numNotePairs.!!
+ 	var musiSyncNotesF = keyF.rhythmDisplay.substr(9).split(" ");
+ 	// musiSyncArrayF = [];
+ 	// for (var changeF=0; changeF<musiSyncNotesF.length; changeF++) {
+ 	// 	musiSyncNotesF.push(numNotePairs[musiSyncNotesF[changeF]]);
+ 	// }
+ 	// for (var concatF=0; concatF<musiSyncNotesF.length; concatF++) {
+ 	// 	$scope.keyFDisplay += musiSyncNotesF[concatF] + " ";
+ 	// }
+ 	// // console.log(keyFDisplay);
 
  	var keyJ = new KeyRhythm("J");
  	$scope.keyJDisplay = keyJ.rhythmDisplay.substr(9);
