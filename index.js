@@ -46,7 +46,6 @@ rhythmApp.controller("rhythmController", function($scope) {
  		$scope.globalAccuracy=newAccuracy;
  	}
 
- 	// $scope.changeVar="..."
 
  	var KeyRhythm = function (key) {
  		// this.key = key;
@@ -72,7 +71,6 @@ rhythmApp.controller("rhythmController", function($scope) {
 
 	 	this.rhythmDisplay = rhythmDisplay;
 	 	this.gameRhythm = gameRhythm;
-	 	// this.lastNote = lastNote;
 
 	 	console.log(rhythmDisplay, "rhythm for", key);
 
@@ -93,140 +91,18 @@ rhythmApp.controller("rhythmController", function($scope) {
 	 				console.log("Your accuracy in pressing the rhythm for ", key, ':', tappy.compare(userTappy, gameTappy));
 	 				accuracyCount++;
 	 				globalAccuracy=(globalAccuracy+tappy.compare(userTappy, gameTappy))/accuracyCount;
-	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)));
+	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)*100));
 	 			}
 	 		}
 	 	})
-
+	 	//end of class
  	}
 
  	var keyF = new KeyRhythm("F");
+ 	$scope.keyFDisplay = keyF.rhythmDisplay.substr(9);
+
+
  	var keyJ = new KeyRhythm("J");
-
- 	// $scope.globalAccuracy=keyF.accuracy;
-
- 	// $scope.setAccuracy(45);
-
- 	// if (keyF.accuracy!=undefined) {
- 	// 	console.log(keyF.accuracy);
- 	// }
-
- 	// var gameTappyF = new tappy.Rhythm(keyF.gameRhythm);
- 	// var gameTappyJ = new tappy.Rhythm(keyJ.gameRhythm);
-
- 	// // $scope.tapDrumF = function($event) {
- 	// // 	if ($event.ctrlKey) {
- 	// // 		console.log("f pressed");
- 	// // 	}
- 	// // }
-
- 	// var userRhythmF = new tappy.Rhythm();
-
- 	// $scope.$on('keydown', function(event, e) {
- 	// 	if (e.which === 70) {
- 	// 		console.log("f tapped.");
-
- 	// 		if (userRhythmF.length < keyF.gameRhythm.length) {
- 	// 			userRhythmF.tap();
- 	// 			console.log("F tap");
- 	// 		} else {
- 	// 			userRhythmF.tap();
- 	// 			userRhythmF.done();
- 	// 			console.log("comparing the F accuracy. accuracy: ", tappy.compare(userRhythmF, gameTappyF));
- 	// 		}
- 	// 	}
- 	// })
-
-
-
-
- 	// $scope.accuracy = "...";
-
-
- 	// console.log(keyF.accuracy)
-
- 	// if (keyF.accuracy!=undefined) {
- 	// console.log(keyF.accuracy);
- 	// }
-
- 	// $scope.accuracy = (keyF.accuracy+keyJ.accuracy)/2;
-
-
- 	// var gameRhythmF = new Array();
- 	// var gameRhythmJ = new Array();
-
-
-
-
- 	// var toLimF=0;
- 	// var toLimJ=0;
- 	// var i=0;
-
- 	// $scope.rhythmF = "";
- 	// $scope.ryhthmJ = "";
-
- 	// while (toLimF<limit) {
- 	// 	var randNoteF = Math.floor(Math.random()*4+1);
- 	// 	if ((toLimF+randNoteF)>8){
- 	// 		randNoteF=8-toLimF;
- 	// 	}
- 	// 	toLimF+=randNoteF;
- 	// 	gameRhythmF[i]=randNoteF;
- 	// 	i++;
- 	// 	$scope.rhythm += randNote + ' ';
- 	// }
-
- 	// while (toLim<limit) {
- 	// 	var randNoteF = Math.floor(Math.random()*4+1);
- 	// 	if ((toLim+randNote)>8){
- 	// 		randNote=8-toLim;
- 	// 	}
- 	// 	toLim+=randNote;
- 	// 	gameRhythm[i]=randNote;
- 	// 	i++;
- 	// 	$scope.rhythm += randNote + ' ';
- 	// }
-
-
- 	// var lastNoteF = gameRhythmF.pop();
-
- 	//add rests... after
-
- // 	var gameTappy = new tappy.Rhythm(gameRhythm);
-
- // 	console.log(gameTappy);
- // 	console.log(gameRhythm, lastNote);
-
- // 	var userRhythm = new tappy.Rhythm();
-
- // // 	$scope.accuracy = "...";
-
-	// $scope.tapDrum = function() {
-	// 	if (userRhythm.length < gameRhythm.length) {
-	// 		userRhythm.tap();
-	// 		console.log('tap');
-	// 	} else {
-	// 		userRhythm.tap();
-	// 		userRhythm.done();
-	// 		console.log("rhythm done.")
-	// 		console.log("comparing ", tappy.compare(userRhythm, gameTappy));
-	// 		$scope.accuracy = tappy.compare(userRhythm, gameTappy).toFixed(2)*100;
-	// 	}	
-	// }
-
-	// $scope.playRhythm = function() {
-	// 	userRhythm.done();
-	// 	userRhythm.playback(
-	// 		function(i) {console.log('Tap number ' + i); },
-	// 		function() {console.log('Finished rhythm.')}
-	// 	);
-	// }
-
-	// $scope.compareRhythm = function() {
-	// 	userRhythm.done();
-	// 	console.log("comparing ", tappy.compare(userRhythm, gameTappy));
-	// 	// userRhythm = new tappy.Rhythm();
-	// }
-
+ 	$scope.keyJDisplay = keyJ.rhythmDisplay.substr(9);
 
 });
