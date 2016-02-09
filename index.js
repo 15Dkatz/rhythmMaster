@@ -26,7 +26,7 @@ rhythmApp.run(function($document, $rootScope){
 	});
 });
 
-rhythmApp.controller("rhythmController", function($scope) {
+rhythmApp.controller("rhythmController", function($scope, $sce) {
 
  	var noteLengths = [1, 2, 3, 4];
  	var limit = 8; /* 8 beats for two measures */
@@ -45,6 +45,14 @@ rhythmApp.controller("rhythmController", function($scope) {
  	$scope.setAccuracy = function(newAccuracy) {
  		$scope.globalAccuracy=newAccuracy;
  	}
+
+ 	var numNotePairs = {
+ 		1: "q",
+ 		2: "h",
+ 		3: "j",
+ 		4: "w"
+ 	}
+
 
 
  	var KeyRhythm = function (key) {
@@ -95,35 +103,62 @@ rhythmApp.controller("rhythmController", function($scope) {
 	 			}
 	 		}
 	 	})
+
+	 	//change to music notation
+	 	var musiSyncNotes = rhythmDisplay.substr(9).split(" ");
+	 	var musiSyncNotesString = "";
+
+	 	for (var f=0; f<musiSyncNotes.length-1; f++){
+	 		musiSyncNotes[f] = numNotePairs[musiSyncNotes[f]];
+	 		musiSyncNotesString += musiSyncNotes[f];
+	 		//Use multiplication algorithm for spacing? .. <-
+
+	 		//fix spacing....
+	 		if (musiSyncNotes[f]==="h") {
+	 			musiSyncNotesString += "\u00A0\u00A0";
+	 		}
+	 		if (musiSyncNotes[f]==="j") {
+	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0";
+	 		}
+	 		if (musiSyncNotes[f]==="w") {
+	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
+	 		}
+	 	}
+
+	 	this.musiString = musiSyncNotesString;
+
+
+
 	 	//end of class
  	}
 
  	//Transform the Rythm into musiSync readable code.
  	//perhaps use to create rests!
- 	var numNotePairs = {
- 		1: "q",
- 		2: "h",
- 		3: "j",
- 		4: "w"
- 	}
-
+ 	
 
  	var keyF = new KeyRhythm("F");
- 	$scope.keyFDisplay = keyF.rhythmDisplay.substr(9);
+ 	$scope.keyFDisplay = keyF.musiString;
 
 
- 	//change each num in keyFDisplay to a char in numNotePairs.!!
- 	var musiSyncNotesF = keyF.rhythmDisplay.substr(9).split(" ");
- 	// musiSyncArrayF = [];
- 	// for (var changeF=0; changeF<musiSyncNotesF.length; changeF++) {
- 	// 	musiSyncNotesF.push(numNotePairs[musiSyncNotesF[changeF]]);
- 	// }
- 	// for (var concatF=0; concatF<musiSyncNotesF.length; concatF++) {
- 	// 	$scope.keyFDisplay += musiSyncNotesF[concatF] + " ";
- 	// }
- 	// // console.log(keyFDisplay);
 
  	var keyJ = new KeyRhythm("J");
- 	$scope.keyJDisplay = keyJ.rhythmDisplay.substr(9);
+ 	$scope.keyJDisplay = keyJ.musiString;
+
+ 	console.log(keyF.musiString, "FmusiString", keyJ.musiString, "JmusiString");
 
 });
+
+//almost...
+//stil not functioning completely correctly.
+// rhythmApp.filter('spaceText', function() {
+// 	return function(input) {
+// 		if(!input) return input;
+// 	// try \s
+// 		var output = input.replace(/ /g, '&nbsp;');
+
+// 		return output;
+// 	};
+
+// });
+
+//use wad.js for sounds on each tap, and a css animation wave effect for the drum animation.

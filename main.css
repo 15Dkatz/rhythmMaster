@@ -18,17 +18,49 @@ body {
 }
 
 .rhythmDisplays {
+	margin: 0 auto;
+	margin-top: 4%;
+	margin-bottom: 4%;
 	font-family: "MusiSync";
+	/*clear: both;*/
+	width: 25%;
+	position: relative;
+	/*z-index: 0;*/
 }
+
+/*#staveLines {
+	/*margin-top: 5%;*/
+	/*position: relative;
+	z-index: 0;
+}
+
+.staveLine {
+	position: relative;
+	z-index: 0;
+	background-color: #eee;
+	width: 100%;
+	height: 2px;
+	margin-top: 5%;
+}*/
 
 #rhythmDisplayF, #rhythmDisplayJ {
-	display: inline-block;
-	width: 25rem;
-	margin: 6.22%;
-	font-size: 5rem;
+	/*display: inline-block;*/
+	width: 100%;
+	text-align: left;
+
+	/*margin: 0 auto;*/
+	/*margin-top: 4%;*/
+	/*float: left;*/
+	padding-top: 2.5%;
+	font-size: 7.5rem;
 	/*font-family: "MusiSync";*/
+	position: relative;
+	z-index: 2;
 }
 
+#rhythmDisplayF {
+	margin-top: -15%;
+}
 
 
 #drumF, #drumJ {

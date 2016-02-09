@@ -14,6 +14,7 @@
 		<div ng-app="rhythmApp">
 			<div ng-controller="rhythmController">
 				<h2>In 4/4. Tap the rhythm at your own tempo!</h2>
+				<h4>F controls the bottom line. J controls the top line.</h4>
 				<!-- <h3 id="rhythm">{{rhythm}}</h3> -->
 				<!-- <button id="drumCircle" ng-click="tapDrumF($event)"></button> -->
 				<!-- <div id="drumCircle" ng-click="tapDrumJ($event)"></div> -->
@@ -27,8 +28,18 @@
 				<div id="globalAccuracy">Accuracy: {{globalAccuracy}}%</div>
 
 				<div class="rhythmDisplays">
-					<div id="rhythmDisplayF">{{keyFDisplay}}</div>
+					
 					<div id="rhythmDisplayJ">{{keyJDisplay}}</div>
+					<div id="rhythmDisplayF">{{keyFDisplay}}</div>
+				<!-- 	<div id="staveLines">
+						<div class="staveLine"></div>
+						<div class="staveLine"></div>
+						<div class="staveLine"></div>
+						<div class="staveLine"></div>
+						<div class="staveLine"></div>
+					</div> -->
+					<!-- <div class="staveLine"></div> -->
+					<!-- <div id="test">q w h</div> -->
 				</div>
 
 				<div class="drumset">
@@ -45,6 +56,7 @@
 		<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.6/jquery.fullPage.min.js"></script>
+		<script src="http://code.angularjs.org/1.2.0rc1/angular-sanitize.js"></script>
 		<!-- <script src="wad.js"></script> -->
 		<!-- <script src="teoria.js"></script> -->
 		<script src="tappy.min.js"></script>
