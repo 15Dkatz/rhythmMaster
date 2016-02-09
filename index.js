@@ -6,7 +6,7 @@
 
 //add instructions animation with clickable sound, and also add css animations
 
-var rhythmApp = angular.module("rhythmApp", ['ngAudio']);
+var rhythmApp = angular.module("rhythmApp", ['ngAnimate','ngAudio']);
 
 rhythmApp.run(function($document, $rootScope){
 	$document.bind('keydown', function(e) {
@@ -14,7 +14,7 @@ rhythmApp.run(function($document, $rootScope){
 	});
 });
 
-rhythmApp.controller("rhythmController", function($scope, ngAudio) {
+rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
  	var noteLengths = [1, 2, 3, 4];
  	var limit = 8; /* 8 beats for two measures */
@@ -72,9 +72,10 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio) {
 	 	var gameTappy = new tappy.Rhythm(gameRhythm);
 	 	var userTappy = new tappy.Rhythm();
 
-	 	// var tapSound = new Wad({source: 'triangle'})
 	 	$scope.drumSound = ngAudio.load("sounds/SD0000.mp3");
 	 	$scope.drumSound.volume = "1.0";
+
+	 	// var div = $("rhythmDisplay"+key);
 
 	 	$scope.$on('keydown', function(event, e) {
 	 		if (e.which === keycodes[key]) {
@@ -90,19 +91,17 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio) {
 	 				globalAccuracy=(globalAccuracy+tappy.compare(userTappy, gameTappy))/accuracyCount;
 	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)*100));
 	 			}
-
-	 			// tapSound.play({
-	 			// 	volume: 0.8,
-	 			// 	wait: 0,
-	 			// 	pitch: 'C2',
-	 			// 	env: {
-	 			// 		attack: 0.1,
-	 			// 		decay: 0.05,
-	 			// 		sustain: 0.4,
-	 			// 		hold: 0.05	
-	 			// 	}
-	 			// })
 	 			$scope.drumSound.play();
+
+	 			// $scope.addClass('red');
+
+	 			// $animate.addClass(key+"rhythmDisplay", "red");
+	 			// div.animate({height: '300px', opacity: '0.4'}, "slow");
+	 			//animate the div key
+	 			// $("rhythmDisplay"+key).animate({
+	 			// 	width: '+=150px',
+	 			// 	background: '#f10f10'
+	 			// })
 	 		}
 	 	})
 
@@ -129,6 +128,10 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio) {
 
 	 	this.musiString = musiSyncNotesString;
 
+
+
+
+
 	 	//end of class
  	}
 
@@ -137,7 +140,7 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio) {
 
  	var keyF = new KeyRhythm("F");
  	$scope.keyFDisplay = keyF.musiString;
-
+ 	//call the animation here?
 
 
  	var keyJ = new KeyRhythm("J");
