@@ -1,24 +1,12 @@
 //goal1: playback a rhythm. [check];
 //goal2: [check] generate a random ryhthm array of quarter, whole or eighth notes, and the user gets feeback on whether or not they click the rhythm correctly.
-//have the user see a staff with notes and rhythms displayed.
 //add time signatures.
-//the user can hear the rhythm
-//animate the tap
+//the user can hear the rhythm!!
+//animate the tap!!
 
-//incorporate two key tapping for two staves - F and J, for example, if the left hand has a different rhythm than the right hand.
-//useful for piano rhythm practicing.
-//all the pieces there!
+//add instructions animation with clickable sound, and also add css animations
 
-
-//create a tapDrum() class, and pass in an 'f' arugment and a 'g' argument.
-
-
-//figure out how to set a global accuracy!
-
-//why doesnt the instance of globalAccuracy change the global scope?
-
-
-var rhythmApp = angular.module("rhythmApp", []);
+var rhythmApp = angular.module("rhythmApp", ['ngAudio']);
 
 rhythmApp.run(function($document, $rootScope){
 	$document.bind('keydown', function(e) {
@@ -26,7 +14,7 @@ rhythmApp.run(function($document, $rootScope){
 	});
 });
 
-rhythmApp.controller("rhythmController", function($scope, $sce) {
+rhythmApp.controller("rhythmController", function($scope, ngAudio) {
 
  	var noteLengths = [1, 2, 3, 4];
  	var limit = 8; /* 8 beats for two measures */
@@ -54,9 +42,7 @@ rhythmApp.controller("rhythmController", function($scope, $sce) {
  	}
 
 
-
  	var KeyRhythm = function (key) {
- 		// this.key = key;
  		var limit = 8;
  		var toLim = 0;
  		var rhythmDisplay;
@@ -86,6 +72,9 @@ rhythmApp.controller("rhythmController", function($scope, $sce) {
 	 	var gameTappy = new tappy.Rhythm(gameRhythm);
 	 	var userTappy = new tappy.Rhythm();
 
+	 	// var tapSound = new Wad({source: 'triangle'})
+	 	$scope.drumSound = ngAudio.load("sounds/SD0000.mp3");
+	 	$scope.drumSound.volume = "1.0";
 
 	 	$scope.$on('keydown', function(event, e) {
 	 		if (e.which === keycodes[key]) {
@@ -101,6 +90,19 @@ rhythmApp.controller("rhythmController", function($scope, $sce) {
 	 				globalAccuracy=(globalAccuracy+tappy.compare(userTappy, gameTappy))/accuracyCount;
 	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)*100));
 	 			}
+
+	 			// tapSound.play({
+	 			// 	volume: 0.8,
+	 			// 	wait: 0,
+	 			// 	pitch: 'C2',
+	 			// 	env: {
+	 			// 		attack: 0.1,
+	 			// 		decay: 0.05,
+	 			// 		sustain: 0.4,
+	 			// 		hold: 0.05	
+	 			// 	}
+	 			// })
+	 			$scope.drumSound.play();
 	 		}
 	 	})
 
@@ -127,14 +129,11 @@ rhythmApp.controller("rhythmController", function($scope, $sce) {
 
 	 	this.musiString = musiSyncNotesString;
 
-
-
 	 	//end of class
  	}
 
  	//Transform the Rythm into musiSync readable code.
  	//perhaps use to create rests!
- 	
 
  	var keyF = new KeyRhythm("F");
  	$scope.keyFDisplay = keyF.musiString;
@@ -147,18 +146,5 @@ rhythmApp.controller("rhythmController", function($scope, $sce) {
  	console.log(keyF.musiString, "FmusiString", keyJ.musiString, "JmusiString");
 
 });
-
-//almost...
-//stil not functioning completely correctly.
-// rhythmApp.filter('spaceText', function() {
-// 	return function(input) {
-// 		if(!input) return input;
-// 	// try \s
-// 		var output = input.replace(/ /g, '&nbsp;');
-
-// 		return output;
-// 	};
-
-// });
 
 //use wad.js for sounds on each tap, and a css animation wave effect for the drum animation.
