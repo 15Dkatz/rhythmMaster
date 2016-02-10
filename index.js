@@ -11,12 +11,13 @@ $(document).ready(function() {
 		switch(keyCode) {
 			case drumKeys.f:
 				$('#drumF').animate({
-									// "width": "20rem", 
-									// "height": "20rem",
+									// "width": "16rem", 
+									// "height": "16rem",
 									// "line-height": "18.66667rem",
 									// "color": "#1e88e5",
+									// "border-width": "10px",
 									"font-size": "4.5rem"}, 
-									100, 
+									80, 
 									function() {
 										$('#drumF').removeAttr('style');
 									});
@@ -28,7 +29,7 @@ $(document).ready(function() {
 									// "line-height": "18.66667rem",
 									// "color": "#1e88e5",
 									"font-size": "4.5rem"}, 
-									100, 
+									80, 
 									function() {
 										$('#drumJ').removeAttr('style');
 									});

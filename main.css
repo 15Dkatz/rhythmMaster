@@ -62,9 +62,16 @@ body {
 	margin-top: -15%;
 }
 
+.drumset {
+	/*float: left;*/
+	width: 50%;
+	margin-left: 29%;
+	/*margin-left: 0 auto;*/
+}
 
 #drumF, #drumJ {
-	display: inline-block;;
+	/*display: inline-block;*/
+	float: left;
 	width: 15rem;
 	height: 15rem;
 	line-height: 14rem;
