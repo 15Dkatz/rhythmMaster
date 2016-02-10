@@ -1,10 +1,46 @@
 //goal1: playback a rhythm. [check];
 //goal2: [check] generate a random ryhthm array of quarter, whole or eighth notes, and the user gets feeback on whether or not they click the rhythm correctly.
 //add time signatures.
-//the user can hear the rhythm!!
-//animate the tap!!
 
-//add instructions animation with clickable sound, and also add css animations
+//figure out the correct css animation - why does rem change of one directly affect the other?
+$(document).ready(function() {
+	$(document).keydown(function(e) {
+		var keyCode = e.keyCode || e.which,
+		//capitalize??
+		drumKeys = {f: 70, j: 74};
+		switch(keyCode) {
+			case drumKeys.f:
+				$('#drumF').animate({
+									// "width": "20rem", 
+									// "height": "20rem",
+									// "line-height": "18.66667rem",
+									// "color": "#1e88e5",
+									"font-size": "4.5rem"}, 
+									100, 
+									function() {
+										$('#drumF').removeAttr('style');
+									});
+			break;
+			case drumKeys.j:
+				$('#drumJ').animate({
+									// "width": "20rem", 
+									// "height": "20rem",
+									// "line-height": "18.66667rem",
+									// "color": "#1e88e5",
+									"font-size": "4.5rem"}, 
+									100, 
+									function() {
+										$('#drumJ').removeAttr('style');
+									});
+			break;
+		}
+	})
+
+})
+
+
+
+
 
 var rhythmApp = angular.module("rhythmApp", ['ngAnimate','ngAudio']);
 
@@ -90,10 +126,17 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 				accuracyCount++;
 	 				globalAccuracy=(globalAccuracy+tappy.compare(userTappy, gameTappy))/accuracyCount;
 	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)*100));
+	 				// $scope.$apply($("rhythmDisplay"+key).animate({
+	 				// 	color: rgb(0, 225, 0)
+	 				// }))
+	 				
 	 			}
 	 			$scope.drumSound.play();
 
 	 			// $scope.addClass('red');
+
+
+	 			///call an animation here within $scope.$apply?
 
 	 			// $animate.addClass(key+"rhythmDisplay", "red");
 	 			// div.animate({height: '300px', opacity: '0.4'}, "slow");
