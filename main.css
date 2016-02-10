@@ -10,10 +10,63 @@ body {
 	color: white;
 }
 
+#page1, #page2 {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	-webkit-animation-duration: 1.25s;
+}
+
+#page1 {
+	/*line-height: 100vh;*/
+	position: absolute;
+	z-index: 2;
+}
+
+.instructions {
+	margin-top: 20%;
+	/*margin: 0 auto;*/
+	/*vertical-align: bottom;*/
+	font-size: 3rem;
+}
+
+
+
+.titleFont {
+	font-size: 3.5rem;
+}
+
+.informationalFont {
+	font-size: 3.15rem;
+	margin-bottom: 1%;
+	margin-top: 1%;
+}
+
+#page2 {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	opacity: 0%;
+}
+
+.show {
+	display: inline-block;
+}
+
+.begin {
+	font-size: 2rem;
+}
+
+/*.begin:hover {
+	font-size: 3.25rem;
+
+}*/
+
+
 #globalAccuracy {
 	font-style: bold;
 	font-size: 3rem;
-	margin-top: 4%;
+	margin-top: 5%;
 	margin-bottom: -3%;
 }
 
@@ -22,26 +75,9 @@ body {
 	margin-top: 4%;
 	margin-bottom: 4%;
 	font-family: "MusiSync";
-	/*clear: both;*/
 	width: 20%;
 	position: relative;
-	/*z-index: 0;*/
 }
-
-/*#staveLines {
-	/*margin-top: 5%;*/
-	/*position: relative;
-	z-index: 0;
-}
-
-.staveLine {
-	position: relative;
-	z-index: 0;
-	background-color: #eee;
-	width: 100%;
-	height: 2px;
-	margin-top: 5%;
-}*/
 
 #rhythmDisplayF, #rhythmDisplayJ {
 	/*display: inline-block;*/
@@ -63,14 +99,11 @@ body {
 }
 
 .drumset {
-	/*float: left;*/
 	width: 50%;
 	margin-left: 29%;
-	/*margin-left: 0 auto;*/
 }
 
 #drumF, #drumJ {
-	/*display: inline-block;*/
 	float: left;
 	width: 15rem;
 	height: 15rem;
@@ -83,15 +116,11 @@ body {
 	font-size: 2.5rem;
 	margin: 10%;
 	margin-top: -1%;
-	/*position: absolute;*/
 }
 
 /* Test Class for animations */
 
-/*.red {
-	background-color: rgb(255,0,0);
-}
-*/
+/*Add accuracy transtion*/
 
 /*CSS transitions*/
 /*Page 1: Info page - "Go at your own pace, but keep the 4/4 tempo! F controls the top stave, J controls the bottom stave. The number controls how many beats each tap should last for."*/

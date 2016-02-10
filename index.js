@@ -37,8 +37,11 @@ $(document).ready(function() {
 		}
 	})
 
+	$(document).click(function() {
+		$("#page2").addClass("animated fadeIn show");
+		$("#page1").addClass("animated fadeOut");
+	});
 })
-
 
 
 

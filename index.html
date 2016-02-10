@@ -8,28 +8,26 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css">
 		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css"></link>
 		<link rel="stylesheet" href="main.css">	
 	</head>
 	<body>
-		<div ng-app="rhythmApp">
+		<div id="page1">
+			<div class="instructions">
+				<div class="titleFont">RhythmMaster</div>
+				<!-- Turn F into a picture of an "F" key and J for a picture of the "J" key -->
+				<div class="informationalFont">Tap F for the bottom line tempo, and J for top line tempo.</div>
+				<div class="begin">Click anywhere to begin.</div>
+			</div>
+		</div>
+		<div ng-app="rhythmApp" id="page2">
 			<div ng-controller="rhythmController">
-				<h2>In 4/4. Tap the rhythm at your own tempo!</h2>
-				<h4>F controls the bottom line. J controls the top line.</h4>
 				<div id="globalAccuracy">Accuracy: {{globalAccuracy}}%</div>
 
 				<div class="rhythmDisplays">
 					
 					<div id="rhythmDisplayJ">{{keyJDisplay}}</div>
 					<div id="rhythmDisplayF">{{keyFDisplay}}</div>
-				<!-- 	<div id="staveLines">
-						<div class="staveLine"></div>
-						<div class="staveLine"></div>
-						<div class="staveLine"></div>
-						<div class="staveLine"></div>
-						<div class="staveLine"></div>
-					</div> -->
-					<!-- <div class="staveLine"></div> -->
-					<!-- <div id="test">q w h</div> -->
 				</div>
 
 				<div class="drumset">
