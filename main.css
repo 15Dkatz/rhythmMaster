@@ -14,7 +14,7 @@ body {
 	height: 100%;
 	width: 100%;
 	position: relative;
-	-webkit-animation-duration: 1.25s;
+	-webkit-animation-duration: 1s;
 }
 
 #page1 {
@@ -47,21 +47,17 @@ body {
 	display: none;
 	position: absolute;
 	z-index: 1;
-	/*opacity: 0%;*/
+	opacity: 0%;
 }
 
 .show {
 	display: inline-block;
 }
 
-.begin {
-	font-size: 2rem;
+.hide {
+	display: none;
+	/*font-size: 15rem;*/
 }
-
-/*.begin:hover {
-	font-size: 3.25rem;
-
-}*/
 
 .rhythmCollection {
 	position: relative;
@@ -69,18 +65,22 @@ body {
 	transform: translateY(-50%);
 }
 
-#globalAccuracy {
-	font-style: bold;
-	font-size: 3rem;
-	/*margin-top: 5%;*/
-	margin-bottom: -3%;
+.rhythmHead {
+	display: none;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 2rem;
 }
 
+#globalAccuracy {
+	font-size: 3.5rem;
+	top: -10%;
+}
 
 .rhythmDisplays {
 	margin: 0 auto;
-	margin-top: 4%;
-	margin-bottom: 4%;
+	margin-bottom: 2%;
 	font-family: "MusiSync";
 	position: relative;
 	left: 50%;
@@ -102,7 +102,6 @@ body {
 }
 
 #drumF, #drumJ {
-	display: inline-block;
 	width: 15rem;
 	height: 15rem;
 	line-height: 14rem;
@@ -111,10 +110,17 @@ body {
 	border-width: 5px;
 	background-color: #fb8c00; /*orange darken-1*/
 	color: white;
-	font-size: 2.5rem;
-	margin-left: 5%;
-	margin-right: 5%;
-	/*margin-top: -1%;*/
+	font-size: 3.5rem;
+
+}
+#drumF {
+	margin-left: 30%;
+}
+
+#drumJ {
+	float: right;
+	margin-right: 30%;
+	margin-top: -15rem;
 }
 
 /* Test Class for animations */

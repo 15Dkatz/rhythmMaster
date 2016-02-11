@@ -2,37 +2,18 @@
 //goal2: [check] generate a random ryhthm array of quarter, whole or eighth notes, and the user gets feeback on whether or not they click the rhythm correctly.
 //add time signatures.
 
-//figure out the correct css animation - why does rem change of one directly affect the other?
 $(document).ready(function() {
 	$(document).keydown(function(e) {
 		var keyCode = e.keyCode || e.which,
-		//capitalize??
 		drumKeys = {f: 70, j: 74};
 		switch(keyCode) {
 			case drumKeys.f:
-				$('#drumF').animate({
-									// "width": "16rem", 
-									// "height": "16rem",
-									// "line-height": "18.66667rem",
-									// "color": "#1e88e5",
-									// "border-width": "10px",
-									"font-size": "4.5rem"}, 
-									80, 
-									function() {
-										$('#drumF').removeAttr('style');
-									});
+				$('#drumF').animate({ "font-size": "5rem" }, 80, 
+									function() { $('#drumF').removeAttr('style'); });
 			break;
 			case drumKeys.j:
-				$('#drumJ').animate({
-									// "width": "20rem", 
-									// "height": "20rem",
-									// "line-height": "18.66667rem",
-									// "color": "#1e88e5",
-									"font-size": "4.5rem"}, 
-									80, 
-									function() {
-										$('#drumJ').removeAttr('style');
-									});
+				$('#drumJ').animate({ "font-size": "5rem"}, 80, 
+										function() { $('#drumJ').removeAttr('style'); });
 			break;
 		}
 	})
@@ -42,8 +23,6 @@ $(document).ready(function() {
 		$("#page1").addClass("animated fadeOut");
 	});
 })
-
-
 
 
 var rhythmApp = angular.module("rhythmApp", ['ngAnimate','ngAudio']);
@@ -68,11 +47,18 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
  	var globalAccuracy=0;
  	$scope.globalAccuracy=0;
- 	var accuracyCount=0;
+	$scope.accuracyCount=0;
 
- 	$scope.setAccuracy = function(newAccuracy) {
- 		$scope.globalAccuracy=newAccuracy;
- 	}
+
+	$scope.arrayAverage = function(array) {
+		var total=0;
+		for (var i=0; i<array.length; i++) {
+			total += array[i];
+		}
+		total = total/array.length;
+		return total.toFixed(2)*100;
+	};
+
 
  	var numNotePairs = {
  		1: "q",
@@ -81,8 +67,16 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
  		4: "w"
  	}
 
+ 	var next = false;
+
+ 	$scope.drumSound = ngAudio.load("sounds/SD0000.mp3");
+	$scope.drumSound.volume = "1.0";
+	var accuracies = [];
 
  	var KeyRhythm = function (key) {
+ 		globalAccuracy=0;
+ 		$scope.accuracyCount=0;
+ 		next=false;
  		var limit = 8;
  		var toLim = 0;
  		var rhythmDisplay;
@@ -106,16 +100,11 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 	this.rhythmDisplay = rhythmDisplay;
 	 	this.gameRhythm = gameRhythm;
 
-	 	console.log(rhythmDisplay, "rhythm for", key);
-
-
 	 	var gameTappy = new tappy.Rhythm(gameRhythm);
 	 	var userTappy = new tappy.Rhythm();
 
-	 	$scope.drumSound = ngAudio.load("sounds/SD0000.mp3");
-	 	$scope.drumSound.volume = "1.0";
 
-	 	// var div = $("rhythmDisplay"+key);
+	 	//clear accuracy!! clear the tappy rhythm
 
 	 	$scope.$on('keydown', function(event, e) {
 	 		if (e.which === keycodes[key]) {
@@ -123,13 +112,28 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
 	 			if (userTappy.length < gameRhythm.length) {
 	 				userTappy.tap();
+	 				console.log($scope.accuracyCount, 'ac');
+	 				if (accuracies.length==2) {
+	 					accuracies = accuracies.splice(0,0);
+	 				}
 	 			} else {
 	 				userTappy.tap();
-	 				userTappy.done();
+	 				// userTappy.done();
 	 				console.log("Your accuracy in pressing the rhythm for ", key, ':', tappy.compare(userTappy, gameTappy));
-	 				accuracyCount++;
-	 				globalAccuracy=(globalAccuracy+tappy.compare(userTappy, gameTappy))/accuracyCount;
-	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)*100));
+		 				
+	 				if (tappy.compare(userTappy, gameTappy)!=false) {
+	 					accuracies.push(tappy.compare(userTappy, gameTappy));
+	 					console.log(accuracies);
+	 					if (accuracies.length===2) {
+		 					$scope.$apply($scope.globalAccuracy = $scope.arrayAverage(accuracies));
+		 					$(document).ready(function() {
+		 						$('.rhythmHead').removeClass("fadeOut")
+		 						$('.rhythmHead').addClass("animated fadeIn show")
+		 					})
+						}
+	 				}
+	 				
+	 				next=true;
 	 			}
 	 			$scope.drumSound.play();
 	 		}
@@ -154,8 +158,6 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 	}
 
 	 	this.musiString = musiSyncNotesString;
-
-	 	//end of class
  	}
 
  	//perhaps use to create rests!
@@ -167,6 +169,24 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
  	console.log(keyF.musiString, "FmusiString", keyJ.musiString, "JmusiString");
 
+
+	$(document).ready(function() {	
+		$(document).click(function() {
+			if (next===true) {
+				$('.rhythmHead').removeClass("fadeIn");
+				$('.rhythmHead').addClass("animated fadeOut");
+				console.log("new", next);
+				keyF = new KeyRhythm("F");
+				$scope.keyFDisplay = keyF.musiString;
+
+				keyJ = new KeyRhythm("J");
+				$scope.keyJDisplay = keyJ.musiString;
+			} else {
+				console.log(next, "false");
+			}
+
+		})
+ 	})
 });
 
 //use wad.js for sounds on each tap, and a css animation wave effect for the drum animation.
