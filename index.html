@@ -16,12 +16,12 @@
 			<div class="instructions">
 				<div class="titleFont">RhythmMaster</div>
 				<!-- Turn F into a picture of an "F" key and J for a picture of the "J" key -->
-				<div class="informationalFont">Tap F for the bottom line tempo, and J for top line tempo.</div>
+				<div class="informationalFont">This game lets you practice your rhythm. Tap F for the bottom line tempo, and J for top line tempo.</div>
 				<div class="begin">Click anywhere to begin.</div>
 			</div>
 		</div>
 		<div ng-app="rhythmApp" id="page2">
-			<div ng-controller="rhythmController">
+			<div ng-controller="rhythmController" class="rhythmCollection">
 				<div id="globalAccuracy">Accuracy: {{globalAccuracy}}%</div>
 
 				<div class="rhythmDisplays">

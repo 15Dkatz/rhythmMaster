@@ -18,15 +18,14 @@ body {
 }
 
 #page1 {
-	/*line-height: 100vh;*/
 	position: absolute;
 	z-index: 2;
 }
 
 .instructions {
-	margin-top: 20%;
-	/*margin: 0 auto;*/
-	/*vertical-align: bottom;*/
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 	font-size: 3rem;
 }
 
@@ -40,13 +39,15 @@ body {
 	font-size: 3.15rem;
 	margin-bottom: 1%;
 	margin-top: 1%;
+	width: 56%;
+	margin-left: 22%;
 }
 
 #page2 {
 	display: none;
 	position: absolute;
 	z-index: 1;
-	opacity: 0%;
+	/*opacity: 0%;*/
 }
 
 .show {
@@ -62,49 +63,46 @@ body {
 
 }*/
 
+.rhythmCollection {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
 
 #globalAccuracy {
 	font-style: bold;
 	font-size: 3rem;
-	margin-top: 5%;
+	/*margin-top: 5%;*/
 	margin-bottom: -3%;
 }
+
 
 .rhythmDisplays {
 	margin: 0 auto;
 	margin-top: 4%;
 	margin-bottom: 4%;
 	font-family: "MusiSync";
-	width: 20%;
 	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 #rhythmDisplayF, #rhythmDisplayJ {
-	/*display: inline-block;*/
 	width: 100%;
-	/*text-align: center;*/
-
-	/*margin: 0 auto;*/
-	/*margin-top: 4%;*/
-	/*float: left;*/
 	padding-top: 2.5%;
 	font-size: 7.5rem;
-	/*font-family: "MusiSync";*/
 	position: relative;
 	z-index: 2;
 }
 
-#rhythmDisplayF {
-	margin-top: -15%;
-}
-
 .drumset {
-	width: 50%;
-	margin-left: 29%;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 #drumF, #drumJ {
-	float: left;
+	display: inline-block;
 	width: 15rem;
 	height: 15rem;
 	line-height: 14rem;
@@ -114,8 +112,9 @@ body {
 	background-color: #fb8c00; /*orange darken-1*/
 	color: white;
 	font-size: 2.5rem;
-	margin: 10%;
-	margin-top: -1%;
+	margin-left: 5%;
+	margin-right: 5%;
+	/*margin-top: -1%;*/
 }
 
 /* Test Class for animations */
@@ -126,6 +125,9 @@ body {
 /*Page 1: Info page - "Go at your own pace, but keep the 4/4 tempo! F controls the top stave, J controls the bottom stave. The number controls how many beats each tap should last for."*/
 /*Page 2: Game page - Drumset containing F and J. Animation whenever you click.*/
 /*Page 3: Accuracy Page upon pullup. Contains accuracy, accuracy thus far, and so on Click to start new game.*/
+
+/*FIX CENTERING*/
+/*When user does one rhythm, the game shows the accuracy, and allows user to click to generate a new rhythms*/
 
 /*Additions!*/
 /*New LEVELS!*/

@@ -130,25 +130,8 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 				accuracyCount++;
 	 				globalAccuracy=(globalAccuracy+tappy.compare(userTappy, gameTappy))/accuracyCount;
 	 				$scope.$apply($scope.setAccuracy(globalAccuracy.toFixed(2)*100));
-	 				// $scope.$apply($("rhythmDisplay"+key).animate({
-	 				// 	color: rgb(0, 225, 0)
-	 				// }))
-	 				
 	 			}
 	 			$scope.drumSound.play();
-
-	 			// $scope.addClass('red');
-
-
-	 			///call an animation here within $scope.$apply?
-
-	 			// $animate.addClass(key+"rhythmDisplay", "red");
-	 			// div.animate({height: '300px', opacity: '0.4'}, "slow");
-	 			//animate the div key
-	 			// $("rhythmDisplay"+key).animate({
-	 			// 	width: '+=150px',
-	 			// 	background: '#f10f10'
-	 			// })
 	 		}
 	 	})
 
@@ -159,9 +142,6 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 	for (var f=0; f<musiSyncNotes.length-1; f++){
 	 		musiSyncNotes[f] = numNotePairs[musiSyncNotes[f]];
 	 		musiSyncNotesString += musiSyncNotes[f];
-	 		//Use multiplication algorithm for spacing? .. <-
-
-	 		//fix spacing....
 	 		if (musiSyncNotes[f]==="h") {
 	 			musiSyncNotesString += "\u00A0\u00A0";
 	 		}
@@ -175,20 +155,12 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
 	 	this.musiString = musiSyncNotesString;
 
-
-
-
-
 	 	//end of class
  	}
 
- 	//Transform the Rythm into musiSync readable code.
  	//perhaps use to create rests!
-
  	var keyF = new KeyRhythm("F");
  	$scope.keyFDisplay = keyF.musiString;
- 	//call the animation here?
-
 
  	var keyJ = new KeyRhythm("J");
  	$scope.keyJDisplay = keyJ.musiString;
