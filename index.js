@@ -67,7 +67,7 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
  		3: "j",
  		4: "w",
  		//eigth notes
- 		5: "e"
+ 		// 5: "e"
  	}
 
  	var next = false;
@@ -110,6 +110,9 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
  		if (level>1) {
  			limit=12;
  		}
+ 		if (level>2) {
+ 			limit=16;
+ 		}
  		var toLim = 0;
  		var rhythmDisplay;
  		var gameRhythm = new Array();
@@ -118,9 +121,9 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
  		//changing which notes are available to access in numNotePairs
  		var randNoteLim = 4;
- 		if (level>2) {
- 			randNoteLim = 5;
- 		}
+ 		// if (level>2) {
+ 		// 	randNoteLim = 5;
+ 		// }
 
  		while (toLim<limit) {
 	 		var randNote = Math.floor(Math.random()*randNoteLim+1);
@@ -191,17 +194,17 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 		}
 	 		musiSyncNotes[f] = numNotePairs[musiSyncNotes[f]];
 	 		musiSyncNotesString += musiSyncNotes[f];
-	 		if (musiSyncNotes[f]==="q"){
-	 			musiSyncNotesString += "\u00A0";
-	 		}
+	 		// if (musiSyncNotes[f]==="q"){
+	 		// 	musiSyncNotesString += "\u00A0";
+	 		// }
 	 		if (musiSyncNotes[f]==="h") {
-	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0";
+	 			musiSyncNotesString += "\u00A0\u00A0";
 	 		}
 	 		if (musiSyncNotes[f]==="j") {
-	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
+	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0";
 	 		}
 	 		if (musiSyncNotes[f]==="w") {
-	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";	
+	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";	
 	 		}
 	 	}
 
