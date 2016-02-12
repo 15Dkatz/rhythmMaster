@@ -71,6 +71,8 @@ body {
 	left: 50%;
 	transform: translateX(-50%);
 	font-size: 2rem;
+	/*-webkit-animation-duration: 1s;*/
+	top: -15%;
 }
 
 #globalAccuracy {
@@ -91,7 +93,9 @@ body {
 	width: 100%;
 	padding-top: 2.5%;
 	font-size: 7.5rem;
-	position: relative;
+	/*position: relative;*/
+	/*float: left;*/
+	/*left: 3%;*/
 	z-index: 2;
 }
 
@@ -113,6 +117,7 @@ body {
 	font-size: 3.5rem;
 
 }
+
 #drumF {
 	margin-left: 30%;
 }
@@ -121,6 +126,13 @@ body {
 	float: right;
 	margin-right: 30%;
 	margin-top: -15rem;
+}
+
+#levelDisplay {
+	/*position: fixed;*/
+	float: bottom-right;
+	top: 0;
+	right: 0;
 }
 
 /* Test Class for animations */

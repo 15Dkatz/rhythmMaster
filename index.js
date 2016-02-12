@@ -2,6 +2,7 @@
 //goal2: [check] generate a random ryhthm array of quarter, whole or eighth notes, and the user gets feeback on whether or not they click the rhythm correctly.
 //add time signatures.
 
+
 $(document).ready(function() {
 	$(document).keydown(function(e) {
 		var keyCode = e.keyCode || e.which,
@@ -64,7 +65,9 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
  		1: "q",
  		2: "h",
  		3: "j",
- 		4: "w"
+ 		4: "w",
+ 		//eigth notes
+ 		5: "e"
  	}
 
  	var next = false;
@@ -73,21 +76,59 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	$scope.drumSound.volume = "1.0";
 	var accuracies = [];
 
- 	var KeyRhythm = function (key) {
+
+	//add a level setter on click.
+
+	//add a level paramater, function(key, level)
+	//if level == 1, 4/4 time signature, 2 measures, q, h, w, notes.
+	//if level == 2, 4/4 time signature, 3 measures, w/ 8th notes too.
+	//if level == 3, 6/8 time signature...
+
+	//explain levels!
+
+	//find the bug
+
+	$scope.globalLevel = 1;
+
+	$scope.$on('keydown', function(event, e) {
+		//enter keycode
+		if (e.which === 13) {
+			if ($scope.globalLevel<3) {
+				$scope.globalLevel+=1;
+			} else {
+				$scope.globalLevel=1;
+			}
+		}
+	})
+
+
+ 	var KeyRhythm = function (key, level) {
  		globalAccuracy=0;
  		$scope.accuracyCount=0;
  		next=false;
  		var limit = 8;
+ 		if (level>1) {
+ 			limit=12;
+ 		}
  		var toLim = 0;
  		var rhythmDisplay;
  		var gameRhythm = new Array();
 
  		var i=0;
 
+ 		//changing which notes are available to access in numNotePairs
+ 		var randNoteLim = 4;
+ 		if (level>2) {
+ 			randNoteLim = 5;
+ 		}
+
  		while (toLim<limit) {
-	 		var randNote = Math.floor(Math.random()*4+1);
-	 		if ((toLim+randNote)>8){
-	 			randNote=8-toLim;
+	 		var randNote = Math.floor(Math.random()*randNoteLim+1);
+	 		if (randNote==5) {
+	 			randNote=0.5;
+	 		}
+	 		if ((toLim+randNote)>limit){
+	 			randNote=limit-toLim;
 	 		}
 	 		toLim+=randNote;
 	 		gameRhythm[i]=randNote;
@@ -108,8 +149,9 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 
 	 	$scope.$on('keydown', function(event, e) {
 	 		if (e.which === keycodes[key]) {
+	 			//debigging
 	 			console.log(key, "tapped");
-
+	 			console.log(level, "level");
 	 			if (userTappy.length < gameRhythm.length) {
 	 				userTappy.tap();
 	 				console.log($scope.accuracyCount, 'ac');
@@ -144,27 +186,34 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 	 	var musiSyncNotesString = "";
 
 	 	for (var f=0; f<musiSyncNotes.length-1; f++){
+	 		if ((musiSyncNotes[f])==0.5) {
+	 			musiSyncNotes[f]=5;
+	 		}
 	 		musiSyncNotes[f] = numNotePairs[musiSyncNotes[f]];
 	 		musiSyncNotesString += musiSyncNotes[f];
-	 		if (musiSyncNotes[f]==="h") {
-	 			musiSyncNotesString += "\u00A0\u00A0";
+	 		if (musiSyncNotes[f]==="q"){
+	 			musiSyncNotesString += "\u00A0";
 	 		}
-	 		if (musiSyncNotes[f]==="j") {
+	 		if (musiSyncNotes[f]==="h") {
 	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0";
 	 		}
+	 		if (musiSyncNotes[f]==="j") {
+	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
+	 		}
 	 		if (musiSyncNotes[f]==="w") {
-	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";
+	 			musiSyncNotesString += "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0";	
 	 		}
 	 	}
 
-	 	this.musiString = musiSyncNotesString;
+	 	console.log(musiSyncNotesString);
+	 	this.musiString = musiSyncNotesString.replace("undefined", "");
  	}
 
  	//perhaps use to create rests!
- 	var keyF = new KeyRhythm("F");
+ 	var keyF = new KeyRhythm("F", $scope.globalLevel);
  	$scope.keyFDisplay = keyF.musiString;
 
- 	var keyJ = new KeyRhythm("J");
+ 	var keyJ = new KeyRhythm("J", $scope.globalLevel);
  	$scope.keyJDisplay = keyJ.musiString;
 
  	console.log(keyF.musiString, "FmusiString", keyJ.musiString, "JmusiString");
@@ -176,10 +225,10 @@ rhythmApp.controller("rhythmController", function($scope, ngAudio, $animate) {
 				$('.rhythmHead').removeClass("fadeIn");
 				$('.rhythmHead').addClass("animated fadeOut");
 				console.log("new", next);
-				keyF = new KeyRhythm("F");
+				keyF = new KeyRhythm("F", $scope.globalLevel);
 				$scope.keyFDisplay = keyF.musiString;
 
-				keyJ = new KeyRhythm("J");
+				keyJ = new KeyRhythm("J", $scope.globalLevel);
 				$scope.keyJDisplay = keyJ.musiString;
 			} else {
 				console.log(next, "false");
